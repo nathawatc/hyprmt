@@ -52,4 +52,4 @@ See [Hyprland Bind Guide](docs/getting-started/hyprland-bind-guide.md) for ready
 >
 > - This utility only targets `monitorv2`
 > - The current workflow reloads Hyprland before applying the single-display modes
-> - `monitorv2[NAME]:disabled 0` is intentionally avoided because it does not restore the correct resolution reliably
+> - `monitorv2[NAME]:disabled 0` is intentionally avoided since testing with v0.54.3 does not restore the correct resolution reliably <!-- rumdl-disable-line MD013 -->
