@@ -1,5 +1,5 @@
 pkgname=hyprmt
-pkgver=0.1.0
+pkgver=1.0.0
 pkgrel=1
 pkgdesc="Hyprland monitorv2 toggle utility inspired by the Windows + P display picker"
 arch=("x86_64")
