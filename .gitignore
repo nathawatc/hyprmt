@@ -26,3 +26,11 @@ target
 # Added by cargo
 
 /target
+
+# ---> Arch packaging
+/arch/hyprmt
+/arch/src/
+/arch/pkg/
+/arch/*.pkg.tar.*
+/arch/*.src.tar.*
+/arch/*.log
