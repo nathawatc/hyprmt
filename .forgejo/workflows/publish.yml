@@ -9,7 +9,7 @@ on:
 jobs:
   publish:
     name: Publish Cargo Package
-    runs-on: codeberg-small
+    runs-on: codeberg-medium
 
     steps:
       - name: Validate required variables
