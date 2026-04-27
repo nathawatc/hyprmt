@@ -44,6 +44,10 @@ hyprmt --internal eDP-1 --external HDMI-A-1 --overlay
 This opens `fuzzel` in dmenu mode and lets you choose `Internal`, `External`, or
 `Extended`.
 
+### Hyprland Binds
+
+See [Hyprland Bind Guide](docs/getting-started/hyprland-bind-guide.md) for ready-to-use `hyprland.conf` examples.
+
 > [!NOTE]
 >
 > - This utility only targets `monitorv2`
