@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2024"
 authors = ["nathawat <nathawat@noreply.codeberg.org>"]
 description = "Hyprland monitorv2 toggle utility inspired by the Windows + P"
+documentation = "https://codeberg.org/nathawat/hyprmt/src/branch/main/docs"
 readme = "README.md"
 repository = "https://codeberg.org/nathawat/hyprmt"
 license = "GPL-3.0-or-later"

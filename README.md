@@ -41,7 +41,8 @@ The default mode is `extended`.
 hyprmt --internal eDP-1 --external HDMI-A-1 --overlay
 ```
 
-This opens `fuzzel` in dmenu mode and lets you choose `Internal`, `External`, or `Extended`.
+This opens `fuzzel` in dmenu mode and lets you choose `Internal`, `External`, or
+`Extended`.
 
 > [!NOTE]
 >
