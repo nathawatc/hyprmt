@@ -2,12 +2,17 @@
 name = "hyprmt"
 version = "0.1.0"
 edition = "2024"
+rust-version = "1.85"
 authors = ["nathawat <nathawat@noreply.codeberg.org>"]
 description = "Hyprland monitorv2 toggle utility inspired by the Windows + P"
-documentation = "https://codeberg.org/nathawat/hyprmt/src/branch/main/docs"
+homepage = "https://codeberg.org/nathawat/hyprmt"
+documentation = "https://codeberg.org/nathawat/hyprmt/src/branch/main/docs/SUMMARY.md"
 readme = "README.md"
 repository = "https://codeberg.org/nathawat/hyprmt"
 license = "GPL-3.0-or-later"
+keywords = ["hyprland", "wayland", "monitor", "display"]
+categories = ["command-line-utilities", "gui"]
+publish = ["codeberg"]
 
 [profile.release]
 opt-level = 3
