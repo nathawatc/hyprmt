@@ -1,0 +1,31 @@
+name: Lint and Formatting
+
+on:
+  pull_request:
+    branches: ["main", "master"]
+  workflow_dispatch:
+
+jobs:
+  lint:
+    name: Code Quality Checks
+    runs-on: codeberg-medium
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Rust Toolchain
+        uses: https://github.com/dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+
+      - name: Setup Rust Cache
+        uses: https://github.com/Swatinem/rust-cache@v2
+        with:
+          save-if: true
+
+      - name: Check Formatting
+        run: cargo fmt --all -- --check
+
+      - name: Run Clippy
+        run: cargo clippy --locked --all-targets --all-features -- -D warnings
