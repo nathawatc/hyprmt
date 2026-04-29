@@ -86,7 +86,10 @@ fn prompt_mode() -> Result<Mode> {
         .spawn()
         .context("failed to launch fuzzel")?;
 
-    child.stdin.take().context("failed to open fuzzel stdin")?
+    child
+        .stdin
+        .take()
+        .context("failed to open fuzzel stdin")?
         .write_all(PROMPT_OPTIONS)
         .context("failed to write choices to fuzzel")?;
 
