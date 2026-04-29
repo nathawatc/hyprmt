@@ -1,0 +1,16 @@
+pkgbase = hyprmt
+	pkgdesc = Hyprland monitorv2 toggle utility inspired by the Windows + P display picker
+	pkgver = 1.0.0
+	pkgrel = 1
+	url = https://codeberg.org/nathawat/hyprmt
+	arch = x86_64
+	license = GPL-3.0-or-later
+	makedepends = cargo
+	makedepends = git
+	depends = glibc
+	depends = hyprland
+	optdepends = fuzzel: overlay picker support
+	source = git+https://codeberg.org/nathawat/hyprmt.git#tag=v1.0.0
+	b2sums = f9115c060afba190bbb286db9d22486da4566806b680c15ae1df564dbbc252c117b6b0e889e5a0c95b2358fa7b05d290bbb5934801e14fc065e9192368704a7a
+
+pkgname = hyprmt

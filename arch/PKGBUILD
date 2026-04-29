@@ -11,7 +11,7 @@ depends=("glibc" "hyprland")
 makedepends=("cargo" "git")
 optdepends=("fuzzel: overlay picker support")
 source=("git+${url}.git#tag=v${pkgver}")
-b2sums=("SKIP")
+b2sums=("f9115c060afba190bbb286db9d22486da4566806b680c15ae1df564dbbc252c117b6b0e889e5a0c95b2358fa7b05d290bbb5934801e14fc065e9192368704a7a")
 
 build() {
   cd "${srcdir}/${pkgname}"
