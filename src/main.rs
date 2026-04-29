@@ -14,11 +14,6 @@ struct Cli {
     internal: String,
     #[arg(long)]
     external: String,
-    #[arg(long)]
-    overlay: bool,
-    #[cfg(feature = "brightstay")]
-    #[arg(long)]
-    brightstay: bool,
 
     #[arg(value_enum, default_value_t = Mode::Extended)]
     mode: Mode,
@@ -29,6 +24,10 @@ enum Mode {
     Internal,
     External,
     Extended,
+    Overlay,
+    #[cfg(feature = "brightstay")]
+    #[value(name = "brightstay")]
+    Brightstay,
 }
 
 impl Mode {
@@ -37,6 +36,8 @@ impl Mode {
             "Internal" => Ok(Self::Internal),
             "External" => Ok(Self::External),
             "Extended" => Ok(Self::Extended),
+            #[cfg(feature = "brightstay")]
+            "BrightStay" => Ok(Self::Brightstay),
             other => bail!("unsupported overlay selection: {other}"),
         }
     }
@@ -45,25 +46,33 @@ impl Mode {
 fn main() -> Result<()> {
     let cli = Cli::parse();
 
-    #[cfg(feature = "brightstay")]
-    if cli.brightstay {
-        brightstay::run();
-        return Ok(());
-    }
-
-    let mode = if cli.overlay {
-        prompt_mode()?
-    } else {
-        cli.mode
-    };
-
-    match mode {
+    match cli.mode {
+        #[cfg(feature = "brightstay")]
+        Mode::Brightstay => {
+            brightstay::run();
+            Ok(())
+        }
+        Mode::Overlay => {
+            let selected = prompt_mode()?;
+            match selected {
+                Mode::Extended => enable_extended(),
+                Mode::Internal => apply_single_output_mode(&cli.internal, &cli.external),
+                Mode::External => apply_single_output_mode(&cli.external, &cli.internal),
+                #[cfg(feature = "brightstay")]
+                Mode::Brightstay => {
+                    brightstay::run();
+                    Ok(())
+                }
+                Mode::Overlay => unreachable!(),
+            }
+        }
         Mode::Extended => enable_extended(),
         Mode::Internal => apply_single_output_mode(&cli.internal, &cli.external),
         Mode::External => apply_single_output_mode(&cli.external, &cli.internal),
     }
 }
 
+#[cfg(feature = "brightstay")]
 fn prompt_mode() -> Result<Mode> {
     let mut child = Command::new("fuzzel")
         .args(["--dmenu", "--prompt", "Display: "])
@@ -97,9 +106,41 @@ fn prompt_mode() -> Result<Mode> {
         std::process::exit(0);
     }
 
-    #[cfg(feature = "brightstay")]
-    if selection.trim() == "BrightStay" {
-        brightstay::run();
+    Mode::from_overlay(&selection)
+}
+
+#[cfg(not(feature = "brightstay"))]
+fn prompt_mode() -> Result<Mode> {
+    let mut child = Command::new("fuzzel")
+        .args(["--dmenu", "--prompt", "Display: "])
+        .stdin(Stdio::piped())
+        .stdout(Stdio::piped())
+        .spawn()
+        .context("failed to launch fuzzel")?;
+
+    {
+        let mut stdin = child.stdin.take().context("failed to open fuzzel stdin")?;
+        stdin
+            .write_all(b"Internal\nExternal\nExtended\n")
+            .context("failed to write choices to fuzzel")?;
+    }
+
+    let output = child
+        .wait_with_output()
+        .context("failed to wait for fuzzel")?;
+
+    if !output.status.success() {
+        if output.status.code() == Some(1) {
+            std::process::exit(0);
+        }
+        bail!("fuzzel exited with status {}", output.status);
+    }
+
+    let selection =
+        String::from_utf8(output.stdout).context("fuzzel returned invalid UTF-8 output")?;
+
+    if selection.trim().is_empty() {
+        std::process::exit(0);
     }
 
     Mode::from_overlay(&selection)
