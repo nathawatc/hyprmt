@@ -1,0 +1,10 @@
+[Unit]
+After = suspend.target sleep.target hybrid-sleep.target hibernate.target suspend-then-hibernate.target
+
+[Service]
+Type = oneshot
+ExecStartPre = sleep 7
+ExecStart = /usr/bin/hyprmt -i eDP-1 -e HDMI-A-1 brightstay
+
+[Install]
+WantedBy = graphical.target sleep.target
