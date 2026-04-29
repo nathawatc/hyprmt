@@ -16,6 +16,10 @@ struct Cli {
     external: String,
     #[arg(long)]
     overlay: bool,
+    #[cfg(feature = "brightstay")]
+    #[arg(long)]
+    brightstay: bool,
+
     #[arg(value_enum, default_value_t = Mode::Extended)]
     mode: Mode,
 }
@@ -40,6 +44,13 @@ impl Mode {
 
 fn main() -> Result<()> {
     let cli = Cli::parse();
+
+    #[cfg(feature = "brightstay")]
+    if cli.brightstay {
+        brightstay::run();
+        return Ok(());
+    }
+
     let mode = if cli.overlay {
         prompt_mode()?
     } else {
@@ -64,7 +75,7 @@ fn prompt_mode() -> Result<Mode> {
     {
         let mut stdin = child.stdin.take().context("failed to open fuzzel stdin")?;
         stdin
-            .write_all(b"Internal\nExternal\nExtended\n")
+            .write_all(b"Internal\nExternal\nExtended\nBrightStay\n")
             .context("failed to write choices to fuzzel")?;
     }
 
@@ -84,6 +95,11 @@ fn prompt_mode() -> Result<Mode> {
 
     if selection.trim().is_empty() {
         std::process::exit(0);
+    }
+
+    #[cfg(feature = "brightstay")]
+    if selection.trim() == "BrightStay" {
+        brightstay::run();
     }
 
     Mode::from_overlay(&selection)
@@ -124,3 +140,6 @@ fn ensure_monitor_present(name: &str) -> Result<()> {
 fn map_hypr_error(error: hyprland::error::HyprError) -> anyhow::Error {
     anyhow!(error.to_string())
 }
+
+#[cfg(feature = "brightstay")]
+mod brightstay;
