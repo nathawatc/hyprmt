@@ -10,9 +10,9 @@ use std::process::{Command, Stdio};
 #[derive(Parser, Debug)]
 #[command(author, version, about)]
 struct Cli {
-    #[arg(long)]
+    #[arg(short = 'i', long)]
     internal: String,
-    #[arg(long)]
+    #[arg(short = 'e', long)]
     external: String,
 
     #[arg(value_enum, default_value_t = Mode::Extended)]
