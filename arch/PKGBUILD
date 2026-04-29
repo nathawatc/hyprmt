@@ -1,3 +1,5 @@
+# Maintainer: nathawat <nathawat at noreply dot codeberg dot org>
+
 pkgname=hyprmt
 pkgver=1.0.0
 pkgrel=1
@@ -5,7 +7,7 @@ pkgdesc="Hyprland monitorv2 toggle utility inspired by the Windows + P display p
 arch=("x86_64")
 url="https://codeberg.org/nathawat/hyprmt"
 license=("GPL-3.0-or-later")
-depends=("gcc-libs" "glibc" "hyprland")
+depends=("glibc" "hyprland")
 makedepends=("cargo" "git")
 optdepends=("fuzzel: overlay picker support")
 source=("git+${url}.git#tag=v${pkgver}")
@@ -25,5 +27,4 @@ package() {
   cd "${srcdir}/${pkgname}"
   install -Dm755 "target/release/${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
   install -Dm644 README.md "${pkgdir}/usr/share/doc/${pkgname}/README.md"
-  install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }
