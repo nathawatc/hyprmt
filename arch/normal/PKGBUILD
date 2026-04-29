@@ -1,0 +1,35 @@
+# Maintainer: nathawat <nathawat at noreply dot codeberg dot org>
+
+pkgname=hyprmt
+pkgver=1.0.1
+pkgrel=1
+pkgdesc="Hyprland monitorv2 toggle utility inspired by the Windows + P display picker"
+arch=("x86_64")
+url="https://codeberg.org/nathawat/hyprmt"
+license=("GPL-3.0-or-later")
+depends=("glibc" "hyprland")
+makedepends=("cargo" "git")
+optdepends=("fuzzel: overlay picker support")
+source=("git+${url}.git#tag=v${pkgver}")
+b2sums=("5ee3a9ec4a9d3c919b7e9858cf0153db6b0c55a3587d2b406eb678fd4bee1264ddc165ed88383439cada068d7cdf36d02f6fc852d6cb06ebdf318c6f3cfd7d4c")
+
+prepare() {
+    cd "${srcdir}/${pkgname}"
+    cargo fetch --locked
+}
+
+build() {
+  cd "${srcdir}/${pkgname}"
+  cargo build --frozen --release
+}
+
+check() {
+  cd "${srcdir}/${pkgname}"
+  cargo test --frozen
+}
+
+package() {
+  cd "${srcdir}/${pkgname}"
+  install -Dm755 "target/release/${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
+  install -Dm644 README.md "${pkgdir}/usr/share/doc/${pkgname}/README.md"
+}

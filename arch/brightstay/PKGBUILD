@@ -13,9 +13,14 @@ optdepends=("fuzzel: overlay picker support")
 source=("git+${url}.git#tag=v${pkgver}")
 b2sums=("5ee3a9ec4a9d3c919b7e9858cf0153db6b0c55a3587d2b406eb678fd4bee1264ddc165ed88383439cada068d7cdf36d02f6fc852d6cb06ebdf318c6f3cfd7d4c")
 
+prepare() {
+    cd "${srcdir}/${pkgname}"
+    cargo fetch --locked
+}
+
 build() {
   cd "${srcdir}/${pkgname}"
-  cargo build --frozen --release
+  cargo build --frozen --release --features brightstay
 }
 
 check() {

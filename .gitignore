@@ -28,9 +28,15 @@ target
 /target
 
 # ---> Arch packaging
-/arch/hyprmt
-/arch/src/
-/arch/pkg/
-/arch/*.pkg.tar.*
-/arch/*.src.tar.*
-/arch/*.log
+/arch/brightstay/hyprmt
+/arch/normal/hyprmt
+/arch/brightstay/src/
+/arch/normal/src/
+/arch/brightstay/pkg/
+/arch/normal/pkg/
+/arch/brightstay/*.pkg.tar.*
+/arch/normal/*.pkg.tar.*
+/arch/brightstay/*.src.tar.*
+/arch/normal/*.src.tar.*
+/arch/brightstay/*.log
+/arch/normal/*.log
