@@ -11,6 +11,6 @@ pkgbase = hyprmt
 	depends = hyprland
 	optdepends = fuzzel: overlay picker support
 	source = git+https://codeberg.org/nathawat/hyprmt.git#tag=v1.0.1
-	b2sums = f9115c060afba190bbb286db9d22486da4566806b680c15ae1df564dbbc252c117b6b0e889e5a0c95b2358fa7b05d290bbb5934801e14fc065e9192368704a7a
+	b2sums = 5ee3a9ec4a9d3c919b7e9858cf0153db6b0c55a3587d2b406eb678fd4bee1264ddc165ed88383439cada068d7cdf36d02f6fc852d6cb06ebdf318c6f3cfd7d4c
 
 pkgname = hyprmt
