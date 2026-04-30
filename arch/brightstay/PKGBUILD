@@ -7,7 +7,7 @@ pkgdesc="Hyprland monitorv2 toggle utility inspired by the Windows + P display p
 arch=("x86_64")
 url="https://codeberg.org/nathawat/hyprmt"
 license=("GPL-3.0-or-later")
-depends=("glibc" "hyprland")
+depends=("glibc" "hyprland" "i2c-tools")
 makedepends=("cargo" "git")
 optdepends=("fuzzel: overlay picker support")
 source=("git+${url}.git#tag=v${pkgver}")
