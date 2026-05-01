@@ -7,11 +7,11 @@ pkgdesc="Hyprland monitorv2 toggle utility inspired by the Windows + P display p
 arch=("x86_64")
 url="https://codeberg.org/nathawat/hyprmt"
 license=("GPL-3.0-or-later")
-depends=("glibc" "hyprland" "i2c-tools")
+depends=("glibc" "hyprland")
 makedepends=("cargo" "git")
 optdepends=("fuzzel: overlay picker support")
-source=("git+${url}.git#tag=v${pkgver}")
-b2sums=("5ee3a9ec4a9d3c919b7e9858cf0153db6b0c55a3587d2b406eb678fd4bee1264ddc165ed88383439cada068d7cdf36d02f6fc852d6cb06ebdf318c6f3cfd7d4c")
+source=("git+${url}.git#tag=v${pkgver}" "${pkgname}.install")
+b2sums=("5ee3a9ec4a9d3c919b7e9858cf0153db6b0c55a3587d2b406eb678fd4bee1264ddc165ed88383439cada068d7cdf36d02f6fc852d6cb06ebdf318c6f3cfd7d4c" "SKIP")
 
 prepare() {
     cd "${srcdir}/${pkgname}"
@@ -33,4 +33,5 @@ package() {
   install -Dm755 "target/release/${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
   install -Dm644 README.md "${pkgdir}/usr/share/doc/${pkgname}/README.md"
   install -Dm644 "${startdir}/${pkgname}.service" "${pkgdir}/etc/systemd/system/${pkgname}.service"
+  install -Dm644 "${startdir}/${pkgname}.install" "${pkgdir}/usr/share/libalpm/scripts/${pkgname}.install"
 }

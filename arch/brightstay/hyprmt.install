@@ -1,0 +1,9 @@
+post_install() {
+  usermod -aG i2c "$1"
+}
+
+post_remove() {
+  if getent group i2c >/dev/null 2>&1; then
+    gpasswd -d "$1" i2c 2>/dev/null || true
+  fi
+}
