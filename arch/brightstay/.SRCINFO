@@ -13,6 +13,6 @@ pkgbase = hyprmt
 	source = git+https://codeberg.org/nathawat/hyprmt.git#tag=v1.0.1
 	source = hyprmt.install
 	b2sums = 5ee3a9ec4a9d3c919b7e9858cf0153db6b0c55a3587d2b406eb678fd4bee1264ddc165ed88383439cada068d7cdf36d02f6fc852d6cb06ebdf318c6f3cfd7d4c
-	b2sums = SKIP
+	b2sums = ef4a0bdd8d6d8170e160809b9220c0d82c68625ce745a4fef72e5c378804c4002b52596db1324c68396a24d8644095bc14f01aba70cb83cad188904cc5558b7a
 
 pkgname = hyprmt

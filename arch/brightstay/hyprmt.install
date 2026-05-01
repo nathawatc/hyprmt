@@ -3,7 +3,6 @@ post_install() {
 }
 
 post_remove() {
-  if getent group i2c >/dev/null 2>&1; then
-    gpasswd -d "$1" i2c 2>/dev/null || true
-  fi
+  echo "note: user still member of i2c group. if no longer needed, run:"
+  echo "  sudo gpasswd -d \$1 i2c"
 }
