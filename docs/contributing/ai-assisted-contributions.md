@@ -1,6 +1,7 @@
 # AI-Assisted Contributions
 
-AI assistance is fine for this project when the resulting changes stay accurate, minimal, and easy to review.
+AI assistance is fine for this project when the resulting changes stay accurate, minimal, and easy
+to review.
 
 ## Expectations
 

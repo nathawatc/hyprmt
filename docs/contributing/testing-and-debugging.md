@@ -1,6 +1,6 @@
 # Testing and Debugging
 
-## Checks To Run
+## Checks to Run
 
 ```bash
 cargo fmt --check
