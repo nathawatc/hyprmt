@@ -12,7 +12,13 @@ pkgbase = hyprmt
 	optdepends = fuzzel: overlay picker support
 	source = git+https://codeberg.org/nathawat/hyprmt.git#tag=v1.0.1
 	source = hyprmt.install
+	source = hyprmt.sysusers
+	source = 45-hyprmt.rules
+	source = hyprmt.conf
 	b2sums = 5ee3a9ec4a9d3c919b7e9858cf0153db6b0c55a3587d2b406eb678fd4bee1264ddc165ed88383439cada068d7cdf36d02f6fc852d6cb06ebdf318c6f3cfd7d4c
-	b2sums = ef4a0bdd8d6d8170e160809b9220c0d82c68625ce745a4fef72e5c378804c4002b52596db1324c68396a24d8644095bc14f01aba70cb83cad188904cc5558b7a
+	b2sums = e023fb49449f158b2a607f80517f446d942e140bc45e4b4a2f303aac382dedac7f8aadd3260f96a0fdb821bc5274c8e8056eae17a43c2b6c4605511681859e2e
+	b2sums = 8577cab4f6c94058f8926e82765d25c9c9b43cc13ae7d462965770684293dc0692c305226107d570517185f119df8df4c6f9de8bec991e5ee59edc8bcd957a09
+	b2sums = e0d5cd0bab39ca44e978b7315de99ed05c687cce9acfb7e5f22a11e1b9d4f8743b41761ffa6cc85812bd265b3dfc90e231e56bd99bd5c3f6cd982c6aef02ca23
+	b2sums = f6f411b54c813432f854c258a3de9c4588119ef7ef6bd4785d5af52696a83a3182c20de8f8de0af6da04d8200727d187d2e3a44aac2a8b59b7e92c98265a3ef6
 
 pkgname = hyprmt

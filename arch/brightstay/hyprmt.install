@@ -1,5 +1,4 @@
 post_install() {
-    groupadd -f i2c
     usermod -aG i2c "$1"
 }
 
