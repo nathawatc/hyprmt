@@ -62,7 +62,7 @@ fn edid_check(edid: &[u8; 128]) -> Option<u16> {
 
 fn fast_path(bus: u8) -> Option<bool> {
     let device_path = format!("{}/i2c-{}", I2C_DEV_PATH, bus);
-    let mut ddc = ddc_i2c::from_i2c_device(&device_path).ok()?;
+    let mut ddc = ddc_i2c::open_linux_device(&device_path).ok()?;
     let mut edid = [0u8; 128];
     ddc.read_edid(0, &mut edid).ok()?;
     if edid_check(&edid).is_none() {
@@ -84,7 +84,7 @@ fn slow_path() -> Option<CacheEntry> {
         }
         let bus: u8 = name[4..].parse().ok()?;
         let device_path = format!("{}/{}", I2C_DEV_PATH, name);
-        let mut ddc = ddc_i2c::from_i2c_device(&device_path).ok()?;
+        let mut ddc = ddc_i2c::open_linux_device(&device_path).ok()?;
         let mut edid = [0u8; 128];
         if ddc.read_edid(0, &mut edid).is_err() {
             continue;
