@@ -9,16 +9,15 @@ The tool validates that both monitor names exist in the current Hyprland
 session, but it does not try to infer which connected display should be treated
 as internal or external.
 
-## `monitorv2` Only
+## Hyprland 0.55.0+ Only
 
-The implementation only targets `monitorv2`. It does not manage older monitor
-syntax or attempt to translate between Hyprland configuration styles.
+The implementation uses the `monitor` keyword API introduced in Hyprland 0.55.0.
+It does not support the removed `monitorv2` dispatcher or older monitor syntax.
 
 ## Reload-Based Switching
 
 Single-display modes currently use a reload-first workflow because the direct
-re-enable path for `monitorv2[NAME]:disabled 0` does not restore resolution
-reliably.
+re-enable path for `monitor "NAME, [config]"` requires manual parameters not inherited from config.
 
 That means the current behavior is practical but not ideal if you want a pure
 live-reconfiguration path without reloading Hyprland.

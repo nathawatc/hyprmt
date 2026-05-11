@@ -16,7 +16,7 @@ The current flow is straightforward:
 1. Parse `--internal`, `--external`, `--overlay`, and the optional mode argument.
 2. If `--overlay` is present, open `fuzzel` in dmenu mode and read the selected mode.
 3. For `Extended`, call Hyprland reload.
-4. For `Internal` or `External`, reload first and then disable the opposite monitor through `monitorv2[NAME]:disabled 1`.
+4. For `Internal` or `External`, reload first and then disable the opposite monitor through `Keyword::set("monitor", "NAME, disable")`.
 
 This design intentionally avoids enabling a disabled monitor with `disabled 0`,
 because that path does not reliably restore the correct resolution.
@@ -27,7 +27,7 @@ The project uses the following Hyprland crate entry points:
 
 - `hyprland::ctl::reload::call()` for config reloads
 - `hyprland::data::Monitors::get()` to validate that the requested monitors exist
-- `hyprland::keyword::Keyword::set()` to write the `monitorv2[...]` disable keyword
+- `hyprland::keyword::Keyword::set()` to write the `monitor "NAME, disable"` keyword
 
 ## Mode Model
 

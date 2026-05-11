@@ -1,7 +1,7 @@
 # HyprMonitor Toggle
 
 A small Hyprland monitor toggle utility inspired by the Windows + P display picker.
-Designed for `monitorv2`-based setups and uses the `hyprland` crate for IPC.
+Uses the `monitor` keyword API (Hyprland 0.55.0+) and the `hyprland` crate for IPC.
 
 ## Features
 
@@ -61,6 +61,6 @@ See [Hyprland Bind Guide](docs/getting-started/hyprland-bind-guide.md) for ready
 
 > [!NOTE]
 >
-> - This utility only targets `monitorv2`
+> - This utility targets Hyprland 0.55.0+ using the `monitor` keyword
 > - The current workflow reloads Hyprland before applying the single-display modes
-> - `monitorv2[NAME]:disabled 0` is intentionally avoided on v0.54.3 it not restore resolution reliably <!-- rumdl-disable-line MD013 -->
+> - Intentionally avoided `monitor "NAME, [config]"` — it require manual parameters not inherited from config <!-- rumdl-disable-line MD013 -->

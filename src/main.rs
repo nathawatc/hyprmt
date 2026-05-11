@@ -123,7 +123,7 @@ fn apply_single_output_mode(enabled: &str, disabled: &str) -> Result<()> {
     ensure_monitor_present(enabled)?;
     ctl::reload::call().map_err(map_hypr_error)?;
     ensure_monitor_present(disabled)?;
-    Keyword::set(format!("monitorv2[{disabled}]:disabled"), 1).map_err(map_hypr_error)?;
+    Keyword::set("monitor", format!("{}, disable", disabled)).map_err(map_hypr_error)?;
     Ok(())
 }
 

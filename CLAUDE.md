@@ -23,7 +23,7 @@ cargo run -- -i eDP-1 -e HDMI-A-1 --overlay    # fuzzel picker
 
 - `hyprland::ctl::reload::call()` — config reload
 - `hyprland::data::Monitors::get()` — monitor validation
-- `hyprland::keyword::Keyword::set()` — `monitorv2[NAME]:disabled` toggle
+- `hyprland::keyword::Keyword::set()` — `monitor "NAME, disable"` keyword write
 
 ## Source
 
@@ -54,6 +54,6 @@ Single-context: `CONTEXT.md` at repo root, `docs/adr/` for architectural decisio
 
 ## Key Constraints
 
-- Targets `monitorv2` only (no older monitor syntax)
-- Single-display modes use reload-first workflow (`monitorv2[NAME]:disabled 1`)
+- Uses `Keyword::set("monitor", "...")` (Hyprland 0.55.0+ `monitor` keyword syntax)
+- Single-display modes use reload-first workflow (`monitor "NAME, disable"`)
 - `--overlay` requires `fuzzel` on PATH

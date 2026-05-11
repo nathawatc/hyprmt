@@ -24,4 +24,4 @@ Then repeat with `--overlay` to confirm that `fuzzel` returns the expected mode.
 
 - If the command fails with a monitor lookup error, verify the exact Hyprland monitor names.
 - If `--overlay` fails immediately, check that `fuzzel` is installed and in `PATH`.
-- If a mode change does not behave as expected, confirm that Hyprland accepted the reload and the `monitorv2` keyword write.
+- If a mode change does not behave as expected, confirm that Hyprland accepted the reload and the `monitor` keyword write.

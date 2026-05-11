@@ -3,7 +3,7 @@
 pkgname=hyprmt
 pkgver=1.0.1
 pkgrel=1
-pkgdesc="Hyprland monitorv2 toggle utility inspired by the Windows + P display picker"
+pkgdesc="Hyprland monitor toggle utility inspired by the Windows + P display picker"
 arch=("x86_64")
 url="https://codeberg.org/nathawat/hyprmt"
 license=("GPL-3.0-or-later")
