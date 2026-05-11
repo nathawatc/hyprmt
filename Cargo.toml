@@ -12,7 +12,6 @@ repository = "https://codeberg.org/nathawat/hyprmt"
 license = "GPL-3.0-or-later"
 keywords = ["hyprland", "wayland", "monitor", "display"]
 categories = ["command-line-utilities", "gui"]
-publish = ["codeberg"]
 
 [profile.release]
 opt-level = 3

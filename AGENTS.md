@@ -22,7 +22,7 @@ hyprmt/
 │   ├── contributing/      # Code style, testing, AI-assisted contributions
 │   └── getting-started/   # Build guide, Hyprland bind guide, project layout
 ├── arch/                  # Arch Linux PKGBUILDs (normal + brightstay variants)
-├── .forgejo/              # Forgejo CI workflows (lint, publish to Codeberg registry)
+├── .forgejo/              # Forgejo CI workflows (lint only)
 ├── .rumdl.toml            # Markdown lint config
 └── Cargo.toml             # edition 2024, MSRV 1.85, feature: brightstay
 ```
@@ -36,7 +36,7 @@ hyprmt/
 | Architecture             | `docs/architecture/overview.md` |                                |
 | Forgejo issue ops        | `docs/agents/issue-tracker.md`  | Uses `fj` CLI                  |
 | Triage labels            | `docs/agents/triage-labels.md`  | Role→label mapping             |
-| CI config                | `.forgejo/workflows/`           | Lint + publish                 |
+| CI config                | `.forgejo/workflows/`           | Lint only (publish removed)    |
 
 ## CONVENTIONS
 
@@ -90,6 +90,7 @@ See `docs/agents/domain.md`.
 
 - **CONTEXT.md** does not exist at root (referred in docs but deferred creation per agent conventions)
 - **docs/adr/** does not exist (no ADRs yet)
-- **Release**: tag `v*.*.*` triggers `publish.yml` → Codeberg cargo registry
+- **Release**: tag `v*.*.*` triggers lint workflow only
 - **Forgejo** (not GitHub) — CI in `.forgejo/workflows/`
 - **Arch packages**: `arch/normal/` and `arch/brightstay/` with separate PKGBUILDs
+- **No publish** — Codeberg cargo registry publishing disabled
