@@ -2,7 +2,6 @@ use anyhow::{Context, Result, anyhow, bail};
 use clap::{Parser, ValueEnum};
 use hyprland::ctl;
 use hyprland::data::Monitors;
-use hyprland::keyword::Keyword;
 use hyprland::prelude::HyprData;
 use std::io::Write;
 use std::process::{Command, Stdio};
@@ -123,7 +122,7 @@ fn apply_single_output_mode(enabled: &str, disabled: &str) -> Result<()> {
     ensure_monitor_present(enabled)?;
     ctl::reload::call().map_err(map_hypr_error)?;
     ensure_monitor_present(disabled)?;
-    Keyword::set("monitor", format!("{}, disable", disabled)).map_err(map_hypr_error)?;
+    ipc::eval_monitor_disable(disabled)?;
     Ok(())
 }
 
@@ -144,6 +143,8 @@ fn ensure_monitor_present(name: &str) -> Result<()> {
 fn map_hypr_error(error: hyprland::error::HyprError) -> anyhow::Error {
     anyhow!("{error}")
 }
+
+mod ipc;
 
 #[cfg(feature = "brightstay")]
 mod brightstay;

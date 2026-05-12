@@ -11,8 +11,13 @@ as internal or external.
 
 ## Hyprland 0.55.0+ Only
 
-The implementation uses the `monitor` keyword API introduced in Hyprland 0.55.0.
+The implementation uses the Lua `hl.monitor` config API introduced in Hyprland 0.55.0.
 It does not support the removed `monitorv2` dispatcher or older monitor syntax.
+
+## Hyprland IPC Eval Gap
+
+The `hyprland` crate does not expose `eval` yet, so `hyprmt` sends `/eval` directly
+to the Hyprland socket as a workaround.
 
 ## Reload-Based Switching
 

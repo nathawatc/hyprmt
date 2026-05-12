@@ -10,6 +10,7 @@
 ## Source Tree
 
 - `src/main.rs`: command-line parsing, overlay prompt, and Hyprland IPC workflow
+- `src/ipc.rs`: manual Hyprland IPC `eval` helper
 
 ## Documentation Tree
 
