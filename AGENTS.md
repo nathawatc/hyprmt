@@ -6,8 +6,9 @@
 
 ## OVERVIEW
 
-`hyprmt` — Single-binary Rust CLI for Hyprland monitor toggle (Windows+P style).
-Communicates via `hyprland` crate IPC (not `hyprctl`).
+`hyprmt` — Single-binary Rust CLI for Hyprland monitor toggle (Windows+P style). Communicates via
+`hyprland` crate IPC, plus manual IPC `eval` for `hl.monitor` because the crate does not expose
+`eval` yet.
 
 ## STRUCTURE
 
@@ -15,6 +16,7 @@ Communicates via `hyprland` crate IPC (not `hyprctl`).
 hyprmt/
 ├── src/                   # Rust source (binary crate, no lib)
 │   ├── main.rs            # CLI parsing, mode dispatch, Hyprland IPC
+│   ├── ipc.rs             # Manual IPC eval helper (crate lacks eval)
 │   └── brightstay.rs      # DDC/EDID brightness fix (feature-gated)
 ├── docs/                  # Project documentation
 │   ├── agents/            # Agent skills config (Forgejo issue tracker, triage, domain)
@@ -50,12 +52,13 @@ hyprmt/
 ## FORBIDDEN
 
 - Using `hyprctl` for main logic — use `hyprland` crate IPC
-- `monitorv2` dispatcher — use `Keyword::set("monitor", ...)` (Hyprland 0.55.0+)
+- `monitorv2` dispatcher — use IPC `eval "hl.monitor({...})"` (Hyprland 0.55.0+)
 
 ## KEY CONSTRAINTS
 
-- Uses `Keyword::set("monitor", "...")` (Hyprland 0.55.0+ `monitor` keyword syntax)
-- Single-display modes use reload-first workflow (`monitor "NAME, disable"`)
+- Uses IPC `eval "hl.monitor({output='NAME', disabled=true})"` to disable monitors (Hyprland 0.55.0+)
+- Manual IPC eval in `src/ipc.rs` because the `hyprland` crate does not expose `eval` yet
+- Single-display modes use reload-first workflow (`hl.monitor(...)` via eval)
 - `--overlay` requires `fuzzel` on PATH
 
 ## COMMANDS

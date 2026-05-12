@@ -1,13 +1,15 @@
 # HyprMonitor Toggle
 
-A small Hyprland monitor toggle utility inspired by the Windows + P display picker.
-Uses the `monitor` keyword API (Hyprland 0.55.0+) and the `hyprland` crate for IPC.
+A small Hyprland monitor toggle utility inspired by the Windows + P display picker. Uses the Lua
+`hl.monitor(...)` config API (Hyprland 0.55.0+) via manual IPC `eval`, and the `hyprland` crate for
+reload/data IPC.
 
 ## Features
 
 - Toggle between internal-only, external-only, and extended display modes
 - Pick the mode through a `fuzzel` overlay
 - Uses Hyprland IPC instead of shelling out to `hyprctl` for the main logic
+- Uses manual IPC `eval` for `hl.monitor` because the `hyprland` crate does not expose `eval` yet
 
 ## Requirements
 
@@ -61,6 +63,7 @@ See [Hyprland Bind Guide](docs/getting-started/hyprland-bind-guide.md) for ready
 
 > [!NOTE]
 >
-> - This utility targets Hyprland 0.55.0+ using the `monitor` keyword
+> - This utility targets Hyprland 0.55.0+ using the Lua config `hl.monitor` API
 > - The current workflow reloads Hyprland before applying the single-display modes
-> - Intentionally avoided `monitor "NAME, [config]"` — it require manual parameters not inherited from config <!-- rumdl-disable-line MD013 -->
+> - Intentionally avoided `hl.monitor({...})` with full config — it require manual parameters not inherited from config <!-- rumdl-disable-line MD013 -->
+> - `hl.monitor` is executed through manual IPC `eval` because the `hyprland` crate does not expose `eval` yet <!-- rumdl-disable-line MD013 -->

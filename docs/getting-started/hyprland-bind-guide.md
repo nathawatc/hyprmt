@@ -55,6 +55,7 @@ bind = $mainMod, M, exec, hyprmt --internal eDP-1 --external HDMI-A-1 extended
 
 ## Notes
 
-- `hyprmt` uses the `monitor` keyword API (Hyprland 0.55.0+).
+- `hyprmt` uses the Lua `hl.monitor` API (Hyprland 0.55.0+).
+- `hl.monitor` is sent through manual IPC `eval`, which requires `XDG_RUNTIME_DIR` and `HYPRLAND_INSTANCE_SIGNATURE`
 - The tool reloads Hyprland before applying single-display modes.
 - If a bind does nothing, verify the monitor names first with `hyprctl monitors`.

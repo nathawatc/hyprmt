@@ -1,7 +1,7 @@
 # Architecture Overview
 
 `hyprmt` is a single-binary Rust CLI that talks to Hyprland over IPC through the
-`hyprland` crate.
+`hyprland` crate, with manual `eval` IPC for `hl.monitor` because the crate does not expose `eval` yet.
 
 The binary has three responsibilities:
 
@@ -16,18 +16,18 @@ The current flow is straightforward:
 1. Parse `--internal`, `--external`, `--overlay`, and the optional mode argument.
 2. If `--overlay` is present, open `fuzzel` in dmenu mode and read the selected mode.
 3. For `Extended`, call Hyprland reload.
-4. For `Internal` or `External`, reload first and then disable the opposite monitor through `Keyword::set("monitor", "NAME, disable")`.
+4. For `Internal` or `External`, reload first and then disable the opposite monitor through IPC `eval "hl.monitor({output='NAME', disabled=true})"`. <!-- rumdl-disable-line MD013 -->
 
 This design intentionally avoids enabling a disabled monitor with `disabled 0`,
 because that path does not reliably restore the correct resolution.
 
 ## IPC Usage
 
-The project uses the following Hyprland crate entry points:
+The project uses the following IPC entry points:
 
 - `hyprland::ctl::reload::call()` for config reloads
 - `hyprland::data::Monitors::get()` to validate that the requested monitors exist
-- `hyprland::keyword::Keyword::set()` to write the `monitor "NAME, disable"` keyword
+- `ipc::eval()` (manual socket IPC) to execute the `hl.monitor({output='NAME', disabled=true})` configuration because the crate does not expose `eval` yet <!-- rumdl-disable-line MD013 -->
 
 ## Mode Model
 

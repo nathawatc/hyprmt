@@ -15,5 +15,6 @@
 
 ## Hyprland Integration
 
-- Use the `hyprland` crate for IPC instead of spawning `hyprctl` unless there is a clear gap in the crate API.
-- Keep monitor and keyword names aligned with the actual Hyprland schema.
+- Use the `hyprland` crate for IPC when possible
+- `src/ipc.rs` is the only manual IPC path, used for `eval` because the crate does not expose it yet
+- Keep monitor and output names aligned with the actual Hyprland schema
