@@ -122,10 +122,7 @@ fn apply_single_output_mode(enabled: &str, disabled: &str) -> Result<()> {
     ensure_monitor_present(enabled)?;
     ctl::reload::call().map_err(map_hypr_error)?;
     ensure_monitor_present(disabled)?;
-    ipc::eval(&format!(
-        "hl.monitor({{output='{}', disabled=true}})",
-        disabled
-    ))?;
+    ipc::eval_monitor_disable(disabled)?;
     Ok(())
 }
 
