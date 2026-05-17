@@ -12,10 +12,10 @@ are `eDP-1` for the laptop panel and `HDMI-A-1` for an external display.
 
 ## Windows + P Style Picker
 
-If you want a Windows + P style picker, bind a key to `--overlay`:
+If you want a Windows + P style picker, bind a key to `overlay`:
 
 ```ini
-bind = $mainMod, P, exec, hyprmt --internal eDP-1 --external HDMI-A-1 --overlay
+bind = $mainMod, P, exec, hyprmt --internal eDP-1 --external HDMI-A-1 overlay
 ```
 
 This opens `fuzzel`, lets you choose `Internal`, `External`, or `Extended`, and
@@ -47,7 +47,7 @@ Adjust the path to match where you installed the binary.
 ```ini
 $mainMod = SUPER
 
-bind = $mainMod, P, exec, hyprmt --internal eDP-1 --external HDMI-A-1 --overlay
+bind = $mainMod, P, exec, hyprmt --internal eDP-1 --external HDMI-A-1 overlay
 bind = $mainMod, I, exec, hyprmt --internal eDP-1 --external HDMI-A-1 internal
 bind = $mainMod, E, exec, hyprmt --internal eDP-1 --external HDMI-A-1 external
 bind = $mainMod, M, exec, hyprmt --internal eDP-1 --external HDMI-A-1 extended
