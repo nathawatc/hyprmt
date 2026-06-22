@@ -16,7 +16,7 @@ conflicts=("hyprmt-brightstay")
 replaces=("hyprmt-brightstay")
 install=hyprmt.install
 source=("${pkgname}-${pkgver}.tar.gz::https://codeberg.org/nathawat/hyprmt/archive/${_tag}.tar.gz")
-b2sums=('129a6c10c75ed4d93bde0e236f67507b07a964d5bfa5a20a5771ce5e5fffc4afd3d0b06d7752547c31e8eb71d245c011612dcc66f13f466316ada7e3128f90a0')
+b2sums=('579f7f3556efafc7dd3bd0fa72406bbf0f4d6f9b3894067d6aa4d650b86a6ec6153eaeae3683f27116158f079a85a1e3948611a97e8858716b55d1a7b5b83bca')
 
 prepare() {
     cd "${srcdir}/${pkgname}"
