@@ -1,7 +1,7 @@
 # Maintainer: nathawat <nathawat at noreply dot codeberg dot org>
 
 pkgname=hyprmt
-pkgver=3.0.0
+pkgver=3.0.1
 pkgrel=1
 _tag=v${pkgver}
 pkgdesc="Hyprland monitor toggle utility inspired by the Windows + P display picker"
