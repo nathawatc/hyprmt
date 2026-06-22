@@ -42,6 +42,44 @@ impl Mode {
     }
 }
 
+#[cfg(test)]
+mod tests {
+    use super::Mode;
+
+    #[test]
+    fn overlay_selection_accepts_supported_modes() {
+        let cases = [
+            ("Internal", Mode::Internal),
+            ("External", Mode::External),
+            ("Extended", Mode::Extended),
+            #[cfg(feature = "brightstay")]
+            ("BrightStay", Mode::Brightstay),
+        ];
+
+        for (selection, expected) in cases {
+            assert_eq!(Mode::from_overlay(selection).unwrap(), expected);
+        }
+    }
+
+    #[test]
+    fn overlay_selection_trims_surrounding_whitespace() {
+        assert_eq!(
+            Mode::from_overlay("\n Extended \t").unwrap(),
+            Mode::Extended
+        );
+    }
+
+    #[test]
+    fn overlay_selection_rejects_invalid_input() {
+        assert!(Mode::from_overlay("Mirror").is_err());
+    }
+
+    #[test]
+    fn overlay_selection_rejects_overlay_mode() {
+        assert!(Mode::from_overlay("Overlay").is_err());
+    }
+}
+
 fn main() -> Result<()> {
     let cli = Cli::parse();
 

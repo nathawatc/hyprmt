@@ -106,3 +106,28 @@ fn format_lua_string(value: &str) -> String {
     formatted.push('"');
     formatted
 }
+
+#[cfg(test)]
+mod tests {
+    use super::format_lua_string;
+
+    #[test]
+    fn lua_string_formatting_escapes_supported_characters() {
+        let cases = [
+            ("HDMI-A-1", "\"HDMI-A-1\""),
+            ("say \"hi\"", "\"say \\\"hi\\\"\""),
+            ("path\\to\\monitor", "\"path\\\\to\\\\monitor\""),
+            ("line\nbreak", "\"line\\nbreak\""),
+            ("carriage\rreturn", "\"carriage\\rreturn\""),
+            ("tab\tstop", "\"tab\\tstop\""),
+            (
+                "mix \"quote\" \\ slash\nrow\rtab\tend",
+                "\"mix \\\"quote\\\" \\\\ slash\\nrow\\rtab\\tend\"",
+            ),
+        ];
+
+        for (input, expected) in cases {
+            assert_eq!(format_lua_string(input), expected);
+        }
+    }
+}
