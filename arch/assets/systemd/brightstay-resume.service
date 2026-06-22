@@ -1,0 +1,14 @@
+[Unit]
+Description=Apply Brightstay after resume
+Before=sleep.target
+StopWhenUnneeded=yes
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/true
+ExecStop=/usr/bin/sleep 7
+ExecStop=/usr/bin/hyprmt -i eDP-1 -e HDMI-A-1 brightstay
+
+[Install]
+WantedBy=sleep.target
