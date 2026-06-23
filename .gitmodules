@@ -1,0 +1,3 @@
+[submodule "arch/hyprmt"]
+	path = arch/hyprmt
+	url = ssh://aur@aur.archlinux.org/hyprmt.git
