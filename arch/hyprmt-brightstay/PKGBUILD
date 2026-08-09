@@ -1,22 +1,21 @@
-# Maintainer: nathawat <nathawat at noreply dot codeberg dot org>
+# Maintainer: nathawat <nathawat[at]noreply[dot]codeberg[dot]org>
 
 pkgname=hyprmt-brightstay
-pkgver=3.0.1
+pkgver=3.0.2
 pkgrel=1
 _tag=v${pkgver}
 pkgdesc="Hyprland monitor toggle utility inspired by the Windows + P display picker"
 arch=("x86_64")
 url="https://codeberg.org/nathawat/hyprmt"
 license=("GPL-3.0-or-later")
-depends=("glibc" "hyprland>=0.55.0")
+depends=("glibc" "libgcc" "hyprland>=0.55.0")
 makedepends=("cargo")
 optdepends=("fuzzel: overlay picker support")
-provides=("hyprmt")
+provides=("hyprmt=${pkgver}")
 conflicts=("hyprmt")
-replaces=("hyprmt")
 install=hyprmt.install
 source=("hyprmt-${pkgver}.tar.gz::https://codeberg.org/nathawat/hyprmt/archive/${_tag}.tar.gz")
-b2sums=('99dcb196700e47d0b6b67304702ed657145ce2327497bc14048057e3e3e80ebb489fe4233201675960d0cca227386c5629a5a31851d924ffe5dd11d9fa4cab90')
+b2sums=('3f5c2a31d6c13c4ceb3106dce6b7bed1669704344aebef9bac1307b63d9374e1a979a9f553ecee2ecbacfe42a38ed840aa1e7c334f5e836085ce6fc2586017cf')
 
 prepare() {
 	cd "${srcdir}/hyprmt"
