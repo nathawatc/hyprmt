@@ -153,9 +153,15 @@ fn slow_path() -> Option<CacheEntry> {
         if !name.starts_with("i2c-") {
             continue;
         }
-        let bus: u8 = name[4..].parse().ok()?;
+        let bus: u8 = match name[4..].parse() {
+            Ok(bus) => bus,
+            Err(_) => continue,
+        };
         let device_path = format!("{}/{}", I2C_DEV_PATH, name);
-        let mut ddc = ddc_i2c::open_linux_device(&device_path).ok()?;
+        let mut ddc = match ddc_i2c::open_linux_device(&device_path) {
+            Ok(ddc) => ddc,
+            Err(_) => continue,
+        };
         let mut edid = [0u8; 128];
         if ddc.read_edid(0, &mut edid).is_err() {
             continue;
