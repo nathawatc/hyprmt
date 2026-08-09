@@ -16,7 +16,7 @@ conflicts=("hyprmt")
 replaces=("hyprmt")
 install=hyprmt.install
 source=("hyprmt-${pkgver}.tar.gz::https://codeberg.org/nathawat/hyprmt/archive/${_tag}.tar.gz")
-b2sums=('579f7f3556efafc7dd3bd0fa72406bbf0f4d6f9b3894067d6aa4d650b86a6ec6153eaeae3683f27116158f079a85a1e3948611a97e8858716b55d1a7b5b83bca')
+b2sums=('99dcb196700e47d0b6b67304702ed657145ce2327497bc14048057e3e3e80ebb489fe4233201675960d0cca227386c5629a5a31851d924ffe5dd11d9fa4cab90')
 
 prepare() {
 	cd "${srcdir}/hyprmt"

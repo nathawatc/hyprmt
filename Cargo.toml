@@ -2,11 +2,10 @@
 name = "hyprmt"
 version = "3.0.1"
 edition = "2024"
-rust-version = "1.85"
+rust-version = "1.92"
 authors = ["nathawat <nathawat@noreply.codeberg.org>"]
 description = "Hyprland monitor toggle utility inspired by the Windows + P"
 homepage = "https://codeberg.org/nathawat/hyprmt"
-documentation = "https://codeberg.org/nathawat/hyprmt/src/branch/main/docs/SUMMARY.md"
 readme = "README.md"
 repository = "https://codeberg.org/nathawat/hyprmt"
 license = "GPL-3.0-or-later"

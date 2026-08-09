@@ -40,8 +40,8 @@ The default mode is `extended`.
 
 ### Overlay Picker
 
-- Short: `hyprmt -i eDP-1 -e HDMI-A-1 --overlay`
-- Long: `hyprmt --internal eDP-1 --external HDMI-A-1 --overlay`
+- Short: `hyprmt -i eDP-1 -e HDMI-A-1 overlay`
+- Long: `hyprmt --internal eDP-1 --external HDMI-A-1 overlay`
 
 This opens `fuzzel` and lets you choose **Internal**, **External**, or **Extended**.
 
@@ -54,10 +54,6 @@ Workaround for a firmware issue on the L22i-40 monitor. When the monitor wakes
 from sleep in custom user color mode, it resets its brightness to 100%. This tool
 re-applies the color preset (VCP code 0x14) to restore the correct brightness and
 RGB Range settings manually.
-
-## Hyprland Binds
-
-See [Hyprland Bind Guide](docs/getting-started/hyprland-bind-guide.md) for ready-to-use `hyprland.conf` examples.
 
 ## Design Notes
 
