@@ -8,7 +8,7 @@ Type=oneshot
 RemainAfterExit=yes
 ExecStart=/usr/bin/true
 ExecStop=/usr/bin/sleep 7
-ExecStop=/usr/bin/hyprmt -i eDP-1 -e HDMI-A-1 brightstay
+ExecStop=/usr/bin/hyprmt brightstay
 
 [Install]
 WantedBy=sleep.target

@@ -4,7 +4,7 @@ After=graphical-session-pre.target
 [Service]
 Type=oneshot
 ExecStartPre=/usr/bin/sleep 3
-ExecStart=/usr/bin/hyprmt -i eDP-1 -e HDMI-A-1 brightstay
+ExecStart=/usr/bin/hyprmt brightstay
 
 [Install]
 WantedBy=graphical-session.target

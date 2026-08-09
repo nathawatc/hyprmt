@@ -9,10 +9,30 @@ use std::process::{Command, Stdio};
 #[derive(Parser, Debug)]
 #[command(author, version, about)]
 struct Cli {
-    #[arg(short = 'i', long)]
-    internal: String,
-    #[arg(short = 'e', long)]
-    external: String,
+    #[arg(
+        short = 'i',
+        long,
+        required_unless_present("mode"),
+        required_if_eq_any([
+            ("mode", "internal"),
+            ("mode", "external"),
+            ("mode", "extended"),
+            ("mode", "overlay"),
+        ])
+    )]
+    internal: Option<String>,
+    #[arg(
+        short = 'e',
+        long,
+        required_unless_present("mode"),
+        required_if_eq_any([
+            ("mode", "internal"),
+            ("mode", "external"),
+            ("mode", "extended"),
+            ("mode", "overlay"),
+        ])
+    )]
+    external: Option<String>,
 
     #[arg(value_enum, default_value_t = Mode::Extended)]
     mode: Mode,
@@ -44,7 +64,8 @@ impl Mode {
 
 #[cfg(test)]
 mod tests {
-    use super::Mode;
+    use super::{Cli, Mode};
+    use clap::Parser;
 
     #[test]
     fn overlay_selection_accepts_supported_modes() {
@@ -78,23 +99,63 @@ mod tests {
     fn overlay_selection_rejects_overlay_mode() {
         assert!(Mode::from_overlay("Overlay").is_err());
     }
+
+    #[test]
+    fn monitor_arguments_are_required_for_default_mode() {
+        let error = Cli::try_parse_from(["hyprmt"]).unwrap_err();
+
+        assert_eq!(
+            error.kind(),
+            clap::error::ErrorKind::MissingRequiredArgument
+        );
+    }
+
+    #[test]
+    fn monitor_arguments_are_required_for_non_brightstay_modes() {
+        for mode in ["internal", "external", "extended", "overlay"] {
+            let error = Cli::try_parse_from(["hyprmt", mode]).unwrap_err();
+
+            assert_eq!(
+                error.kind(),
+                clap::error::ErrorKind::MissingRequiredArgument
+            );
+        }
+    }
+
+    #[cfg(feature = "brightstay")]
+    #[test]
+    fn brightstay_does_not_require_monitor_arguments() {
+        let cli = Cli::try_parse_from(["hyprmt", "brightstay"]).unwrap();
+
+        assert_eq!(cli.mode, Mode::Brightstay);
+    }
 }
 
 fn main() -> Result<()> {
     let cli = Cli::parse();
 
+    #[cfg(feature = "brightstay")]
+    if cli.mode == Mode::Brightstay {
+        brightstay::run();
+        return Ok(());
+    }
+
+    let internal = cli
+        .internal
+        .as_deref()
+        .expect("internal monitor required outside brightstay mode");
+    let external = cli
+        .external
+        .as_deref()
+        .expect("external monitor required outside brightstay mode");
+
     match cli.mode {
-        #[cfg(feature = "brightstay")]
-        Mode::Brightstay => {
-            brightstay::run();
-            Ok(())
-        }
         Mode::Overlay => {
             let selected = prompt_mode()?;
             match selected {
                 Mode::Extended => enable_extended(),
-                Mode::Internal => apply_single_output_mode(&cli.internal, &cli.external),
-                Mode::External => apply_single_output_mode(&cli.external, &cli.internal),
+                Mode::Internal => apply_single_output_mode(internal, external),
+                Mode::External => apply_single_output_mode(external, internal),
                 #[cfg(feature = "brightstay")]
                 Mode::Brightstay => {
                     brightstay::run();
@@ -104,8 +165,10 @@ fn main() -> Result<()> {
             }
         }
         Mode::Extended => enable_extended(),
-        Mode::Internal => apply_single_output_mode(&cli.internal, &cli.external),
-        Mode::External => apply_single_output_mode(&cli.external, &cli.internal),
+        Mode::Internal => apply_single_output_mode(internal, external),
+        Mode::External => apply_single_output_mode(external, internal),
+        #[cfg(feature = "brightstay")]
+        Mode::Brightstay => unreachable!(),
     }
 }
 
